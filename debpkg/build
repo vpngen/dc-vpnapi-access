@@ -90,7 +90,7 @@ if [ "x$1" = "xpkg" ]; then
         
         constract_version "dc-vpnapi-access" 
 
-        for keyfile in /etc/__vpngen__/id_*_ministry_*.pub; do
+        for keyfile in /etc/__vpngen__/dc-vpnapi-access_*.pub; do
                 key=$(cat "${keyfile}")
                 sed "s|{{key}}|${key}|g" < "dc-vpnapi-access/debpkg/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
         done
