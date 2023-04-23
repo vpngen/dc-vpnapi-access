@@ -90,8 +90,9 @@ if [ "x$1" = "xpkg" ]; then
         
         constract_version "dc-vpnapi-access" 
 
-        for key in ls "${CONFDIR}/"id_*_ministry_*.pub; do
-                sed "s/{{key}}/${key}/g" < "${SHARED_BASE}/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
+        for keyfile in "${CONFDIR}/"id_*_ministry_*.pub; do
+                key=$(cat "${keyfile}")
+                sed "s|{{key}}|${key}|g" < "${SHARED_BASE}/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
         done
 
         go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
