@@ -90,7 +90,7 @@ if [ "x$1" = "xpkg" ]; then
         
         constract_version "dc-vpnapi-access" 
 
-        for keyfile in "${CONFDIR}/"id_*_ministry_*.pub; do
+        for keyfile in /etc/__vpngen__/id_*_ministry_*.pub; do
                 key=$(cat "${keyfile}")
                 sed "s|{{key}}|${key}|g" < "${SHARED_BASE}/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
         done
@@ -120,7 +120,7 @@ docker run --rm \
         -e USER_UID=$(id -u) \
         -e BRANCH=${BRANCH} \
         -e VERMETADATA="${VERMETADATA}" \
-        -v "${CONFDIR}":/etc/keydesk \
+        -v "${CONFDIR}":/etc/__vpngen__ \
         -v ${PWD}:${SHARED_BASE} \
         golang:1.19 "${SHARED_BASE}/build" pkg
 
