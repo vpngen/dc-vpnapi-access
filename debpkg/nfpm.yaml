@@ -1,0 +1,42 @@
+name: "vg-dc-vpnapi-access"
+arch: "all"
+platform: "linux"
+version: ${PACKAGE_VERSION}
+section: "default"
+priority: "optional"
+release: ${PACKAGE_RELEASE}
+
+provides:
+- vg-dc-vpnapi-access
+
+maintainer: "Ingmund Ollson <ingmund@proton.me>"
+description: VPNGen datacenter vpnapi access grants
+vendor: "VPNGen"
+homepage: "http://vpngen.org"
+
+contents:
+- dst: /home/_valera_/.ssh
+  type: dir
+  file_info:
+    mode: 0700
+    owner: _valera_
+    group: _valera_
+- src: authorized_keys
+  dst: /home/_valera_/.ssh/authorized_keys
+  file_info:
+    mode: 0400
+    owner: _valera_
+    group: _valera_
+- src: /data/src/dc_vpnapi_access_sudoers.conf
+  dst: /etc/sudoers.d/_valera_
+  file_info:
+    mode: 0400
+    owner: root
+    group: root
+overrides:
+  deb:
+    scripts:
+      preinstall: /data/src/preinstall.sh
+      postremove: /data/src/postremove.sh
+deb:
+  compression: xz
