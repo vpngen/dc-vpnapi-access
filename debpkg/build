@@ -92,7 +92,7 @@ if [ "x$1" = "xpkg" ]; then
 
         for keyfile in /etc/__vpngen__/id_*_ministry_*.pub; do
                 key=$(cat "${keyfile}")
-                sed "s|{{key}}|${key}|g" < "${SHARED_BASE}/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
+                sed "s|{{key}}|${key}|g" < "dc-vpnapi-access/debpkg/src/dc_vpnapi_access_authorized_keys.tpl" >> authorized_keys
         done
 
         go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
