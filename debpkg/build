@@ -86,7 +86,7 @@ if [ "x$1" = "xpkg" ]; then
         git config --global url."ssh://git@github.com/".insteadOf "https://github.com/"
         go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
 
-        git clone ssh://git@github.com/vpngen/dc-vpnapi-access
+        git clone -b "${BRANCH}" ssh://git@github.com/vpngen/dc-vpnapi-access
         
         constract_version "dc-vpnapi-access" 
 
@@ -99,7 +99,7 @@ if [ "x$1" = "xpkg" ]; then
 
         nfpm package --config "${SHARED_BASE}/nfpm.yaml" --target "${SHARED_BASE}/pkg" --packager deb
 
-        chown ${USER_UID}:${USER_UID} "${SHARED_BASE}/pkg/"*.deb
+        chown "${USER_UID}":"${USER_UID}" "${SHARED_BASE}/pkg/"*.deb
 
         exit 0
 fi
